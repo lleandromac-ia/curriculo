@@ -8,15 +8,15 @@
 
   const RADAR_SKILLS = {
     labels: [
-      'Gestão de Contratos',
-      'Negociação de Preços',
-      'Contratação de Serviços',
-      'Desenvolv. de Fornecedores',
-      'Materiais Indiretos',
-      'Redução de Custos',
-      'Análise Contratual'
+      'Gestão de Estoques',
+      'BI (Inteligência de Negócios)',
+      'Análise de Dados',
+      'Excel Avançado',
+      'Power BI',
+      'Planejamento de Materiais',
+      'Gestão de KPIs'
     ],
-    data: [98, 95, 95, 92, 90, 90, 88]
+    data: [95, 90, 85, 100, 85, 95, 90]
   };
 
   function getPreferredTheme() {
@@ -134,9 +134,9 @@
     charts.doughnut = new Chart(canvas.getContext('2d'), {
       type: 'doughnut',
       data: {
-        labels: ['Compras', 'Qualidade', 'Administrativo', 'Vendas / Telemarketing'],
+        labels: ['Planejamento', 'Análise de Custos', 'Finanças', 'Consultoria Excel', 'Operações'],
         datasets: [{
-          data: [58, 30, 9, 3],
+          data: [35, 25, 15, 10, 15],
           backgroundColor: colors.palette,
           borderColor: isDark ? '#1a2332' : '#ffffff',
           borderWidth: 3,
@@ -171,10 +171,10 @@
     charts.timeline = new Chart(canvas.getContext('2d'), {
       type: 'bar',
       data: {
-        labels: ['Guaíba', 'Multiação', 'Sabó', 'PRÁTIKKA', 'Metagal', 'Audax', 'IAM'],
+        labels: ['Metagal (Custos)', 'Consultoria', 'Toyota', 'Rolls-Royce', 'Metagal (Plan.)'],
         datasets: [{
           label: 'Anos',
-          data: [2.1, 0.9, 4.5, 2.2, 10.7, 0.9, 1.2],
+          data: [10.3, 1.8, 0.4, 3.4, 11.2],
           backgroundColor: colors.palette.map((c) => c + 'cc'),
           borderColor: colors.palette,
           borderWidth: 1,
