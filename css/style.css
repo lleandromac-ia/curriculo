@@ -670,30 +670,6 @@ ul {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.cards-grid--recommendations {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.quote-card--featured {
-  grid-column: 1 / -1;
-}
-
-.quote-stanzas p {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  font-style: italic;
-  line-height: 1.75;
-  margin: 0 0 1rem;
-}
-
-.quote-stanzas p:last-child {
-  margin-bottom: 1rem;
-}
-
-.quote-card--featured .quote-stanzas + footer {
-  margin-top: 0.25rem;
-}
-
 .info-card, .cert-card {
   background: var(--bg-card);
   border-radius: 14px;
@@ -887,8 +863,7 @@ ul {
     grid-column: span 1;
   }
 
-  .cards-grid--2,
-  .cards-grid--recommendations {
+  .cards-grid--2 {
     grid-template-columns: 1fr;
   }
 }
