@@ -200,6 +200,37 @@ ul {
   padding-left: 1.25rem;
 }
 
+.sidebar-download h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.sidebar-download__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(144, 205, 244, 0.4);
+  background: rgba(144, 205, 244, 0.12);
+  color: var(--text-sidebar);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.sidebar-download__btn:hover {
+  color: #fff;
+  background: rgba(144, 205, 244, 0.22);
+  border-color: rgba(144, 205, 244, 0.65);
+  transform: translateY(-1px);
+}
+
 .contact-block h3 {
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -838,6 +869,426 @@ ul {
 .footer-links a {
   font-size: 0.875rem;
   font-weight: 600;
+}
+
+/* ===== Print / PDF ===== */
+@page {
+  size: A4 portrait;
+  margin: 8mm;
+}
+
+@media print {
+  :root {
+    --sidebar-width: 0px;
+  }
+
+  * {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 10px;
+    line-height: 1.25;
+  }
+
+  body {
+    display: block;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    zoom: 0.66;
+  }
+
+  .theme-toggle,
+  .sidebar-nav,
+  .sidebar-qr,
+  #recomendacoes {
+    display: none !important;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    border-right: none;
+    border: 1px solid #d6dee8;
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 0.55rem 0.75rem;
+    margin-bottom: 0.6rem;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 0.5rem 0.75rem;
+    background: #f8fbfd;
+    color: #1e293b;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .profile-card {
+    grid-column: 1;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .photo-wrapper {
+    width: 54px;
+    height: 54px;
+    margin: 0;
+    border-width: 2px;
+  }
+
+  .profile-name {
+    font-size: 1rem;
+    color: #0f172a;
+    margin-bottom: 0.1rem;
+  }
+
+  .profile-title {
+    font-size: 0.68rem;
+    margin-bottom: 0.05rem;
+  }
+
+  .profile-company {
+    font-size: 0.62rem;
+  }
+
+  .contact-block {
+    grid-column: 2;
+  }
+
+  .sidebar-download {
+    grid-column: 1;
+  }
+
+  .stats-mini {
+    grid-column: 2;
+    margin-top: 0;
+    display: flex;
+    gap: 0.35rem;
+    justify-self: end;
+  }
+
+  .contact-block h3,
+  .sidebar-download h3 {
+    font-size: 0.56rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .contact-block ul {
+    gap: 0.22rem;
+  }
+
+  .contact-block li {
+    font-size: 0.6rem;
+    line-height: 1.2;
+  }
+
+  .contact-block svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .contact-block a {
+    color: #1e293b;
+  }
+
+  .sidebar-download__btn {
+    width: auto;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.6rem;
+    border-color: #b7cbdf;
+    background: #e9f1f8;
+    color: #0f172a;
+  }
+
+  .stat {
+    padding: 0.3rem 0.4rem;
+    border-radius: 6px;
+    border: 1px solid #d3dce8;
+    background: #ffffff;
+  }
+
+  .stat-value {
+    font-size: 0.7rem;
+  }
+
+  .stat-label {
+    font-size: 0.46rem;
+  }
+
+  .main-content {
+    margin-left: 0;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .hero,
+  .section,
+  .chart-card,
+  .skill-bar-item,
+  .timeline-content,
+  .info-card,
+  .cert-card,
+  .achievement-card,
+  .quote-card {
+    border-color: #dbe2ea !important;
+  }
+
+  .hero {
+    padding: 0.7rem 0.8rem;
+    margin-bottom: 0.5rem;
+    border-radius: 10px;
+  }
+
+  .hero::before {
+    display: none;
+  }
+
+  .hero-badge {
+    font-size: 0.58rem;
+    margin-bottom: 0.35rem;
+    padding: 0.15rem 0.45rem;
+  }
+
+  .hero h2 {
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .hero-summary {
+    font-size: 0.64rem;
+    line-height: 1.25;
+    max-width: none;
+  }
+
+  .section {
+    margin-bottom: 0.45rem;
+  }
+
+  .section-header {
+    margin-bottom: 0.35rem;
+  }
+
+  .section-header h2 {
+    font-size: 0.9rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .section-header h2::after {
+    width: 26px;
+    height: 2px;
+    bottom: -2px;
+  }
+
+  .section-header p {
+    font-size: 0.62rem;
+  }
+
+  .skills-grid,
+  .charts-grid,
+  .cards-grid,
+  .achievements-grid {
+    gap: 0.45rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .chart-card {
+    padding: 0.45rem;
+    border-radius: 8px;
+  }
+
+  .chart-card--radar {
+    min-height: 180px;
+  }
+
+  .chart-container--radar {
+    min-height: 145px;
+    height: 145px;
+  }
+
+  .chart-card h3 {
+    font-size: 0.6rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .chart-container {
+    height: 90px;
+  }
+
+  .chart-container--doughnut,
+  .chart-container--timeline {
+    height: 90px;
+  }
+
+  .skills-bars {
+    gap: 0.3rem;
+  }
+
+  .skill-bar-item {
+    padding: 0.38rem 0.45rem;
+    border-radius: 8px;
+  }
+
+  .skill-bar-header {
+    margin-bottom: 0.28rem;
+  }
+
+  .skill-bar-icon {
+    font-size: 0.75rem;
+  }
+
+  .skill-bar-name {
+    font-size: 0.56rem;
+  }
+
+  .skill-bar-pct {
+    font-size: 0.52rem;
+  }
+
+  .skill-bar-track {
+    height: 6px;
+  }
+
+  .skill-bar-fill,
+  .fade-in,
+  .fade-in.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .timeline {
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem;
+  }
+
+  .timeline::before {
+    display: none;
+  }
+
+  .timeline-item {
+    margin-bottom: 0;
+  }
+
+  .timeline-marker {
+    display: none;
+  }
+
+  .timeline-content {
+    padding: 0.45rem;
+    border-radius: 8px;
+  }
+
+  .timeline-header {
+    margin-bottom: 0.18rem;
+    gap: 0.3rem;
+  }
+
+  .timeline-header h3 {
+    font-size: 0.66rem;
+  }
+
+  .timeline-company {
+    font-size: 0.58rem;
+  }
+
+  .timeline-date {
+    font-size: 0.5rem;
+    padding: 0.1rem 0.35rem;
+  }
+
+  .timeline-location {
+    font-size: 0.54rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline-content ul {
+    font-size: 0.56rem;
+    line-height: 1.2;
+    padding-left: 0.8rem;
+  }
+
+  .timeline-content li {
+    margin-bottom: 0.12rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .achievements-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .info-card,
+  .cert-card,
+  .achievement-card,
+  .quote-card {
+    padding: 0.45rem;
+    border-radius: 8px;
+  }
+
+  .info-card-icon {
+    font-size: 0.85rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .info-card h3,
+  .cert-card h3,
+  .achievement-card h3 {
+    font-size: 0.6rem;
+    margin-bottom: 0.12rem;
+  }
+
+  .info-card-sub,
+  .info-card-meta,
+  .cert-card p,
+  .achievement-card p,
+  .quote-card span {
+    font-size: 0.52rem;
+  }
+
+  .info-card-date,
+  .quote-card strong,
+  .site-footer p,
+  .footer-links a {
+    font-size: 0.5rem;
+  }
+
+  .cert-badge {
+    font-size: 0.48rem;
+    padding: 0.08rem 0.3rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .achievement-rank {
+    font-size: 0.95rem;
+    margin-bottom: 0.12rem;
+  }
+
+  .quote-card p {
+    font-size: 0.56rem;
+    line-height: 1.2;
+    margin-bottom: 0.2rem;
+  }
+
+  .site-footer {
+    margin-top: 0.35rem;
+    padding-top: 0.35rem;
+  }
 }
 
 /* ===== Responsive ===== */
