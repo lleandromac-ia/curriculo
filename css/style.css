@@ -200,6 +200,37 @@ ul {
   padding-left: 1.25rem;
 }
 
+.sidebar-download h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.sidebar-download__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(144, 205, 244, 0.4);
+  background: rgba(144, 205, 244, 0.12);
+  color: var(--text-sidebar);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.sidebar-download__btn:hover {
+  color: #fff;
+  background: rgba(144, 205, 244, 0.22);
+  border-color: rgba(144, 205, 244, 0.65);
+  transform: translateY(-1px);
+}
+
 .contact-block h3 {
   font-size: 0.75rem;
   text-transform: uppercase;
