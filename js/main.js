@@ -4,6 +4,10 @@
   const THEME_KEY = 'curriculo-theme';
   const html = document.documentElement;
   const themeToggle = document.getElementById('themeToggle');
+  const queryParams = new URLSearchParams(window.location.search);
+  const isPdfMode = queryParams.get('pdf') === '1';
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const disableMotion = isPdfMode || prefersReducedMotion;
   let charts = {};
 
   const RADAR_SKILLS = {
@@ -45,10 +49,16 @@
     }
   }
 
-  themeToggle.addEventListener('click', () => {
-    const current = html.getAttribute('data-theme');
-    setTheme(current === 'dark' ? 'light' : 'dark');
-  });
+  function chartAnimation(defaultAnimation) {
+    return disableMotion ? false : defaultAnimation;
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+  }
 
   function initRadarChart() {
     const canvas = document.getElementById('skillsRadarChart');
@@ -80,10 +90,10 @@
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        animation: {
+        animation: chartAnimation({
           duration: 1200,
           easing: 'easeOutQuart'
-        },
+        }),
         elements: {
           line: { borderWidth: 3, tension: 0.1 }
         },
@@ -146,6 +156,10 @@
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        animation: chartAnimation({
+          duration: 900,
+          easing: 'easeOutCubic'
+        }),
         cutout: '62%',
         plugins: {
           legend: {
@@ -184,6 +198,10 @@
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        animation: chartAnimation({
+          duration: 900,
+          easing: 'easeOutCubic'
+        }),
         scales: {
           x: {
             grid: { display: false },
@@ -225,25 +243,35 @@
       charts.radar.options.scales.r.grid.color = colors.grid;
       charts.radar.options.scales.r.angleLines.color = colors.grid;
       charts.radar.options.scales.r.pointLabels.color = colors.text;
-      charts.radar.update();
+      charts.radar.update(disableMotion ? 'none' : undefined);
     }
 
     if (charts.doughnut) {
       charts.doughnut.data.datasets[0].borderColor = borderColor;
       charts.doughnut.options.plugins.legend.labels.color = colors.text;
-      charts.doughnut.update();
+      charts.doughnut.update(disableMotion ? 'none' : undefined);
     }
 
     if (charts.timeline) {
       charts.timeline.options.scales.x.ticks.color = colors.text;
       charts.timeline.options.scales.y.ticks.color = colors.text;
       charts.timeline.options.scales.y.grid.color = colors.grid;
-      charts.timeline.update();
+      charts.timeline.update(disableMotion ? 'none' : undefined);
     }
   }
 
   function animateSkillBars() {
     const items = document.querySelectorAll('.skill-bar-item');
+    if (disableMotion) {
+      items.forEach((item) => {
+        const value = item.getAttribute('data-value');
+        const fill = item.querySelector('.skill-bar-fill');
+        if (fill) fill.style.width = value + '%';
+        item.classList.add('skill-bar-item--visible');
+      });
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -274,6 +302,15 @@
   }
 
   function initFadeIn() {
+    if (disableMotion) {
+      document
+        .querySelectorAll('.timeline-item, .achievement-card, .info-card, .cert-card, .quote-card')
+        .forEach((el) => {
+          el.classList.add('is-visible');
+        });
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -303,7 +340,12 @@
   });
 
   function boot() {
-    setTheme(getPreferredTheme(), true);
+    setTheme(isPdfMode ? 'light' : getPreferredTheme(), true);
+    if (isPdfMode) {
+      document.body.classList.add('pdf-mode');
+      if (themeToggle) themeToggle.style.display = 'none';
+    }
+
     initCharts();
     animateSkillBars();
     initFadeIn();
@@ -311,6 +353,17 @@
     window.addEventListener('resize', () => {
       Object.values(charts).forEach((c) => c.resize());
     });
+
+    if (isPdfMode) {
+      // Force a final static render before the PDF capture.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          Object.values(charts).forEach((c) => c.update('none'));
+          window.dispatchEvent(new Event('resize'));
+          window.__PDF_READY__ = true;
+        });
+      });
+    }
   }
 
   if (document.readyState === 'loading') {
